@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MiniPaint2.MainPage"
+             Title="MiniPaint2">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <HorizontalStackLayout Grid.Row="0" Padding="8" Spacing="10" BackgroundColor="#F0F0F0">
+
+            <Label Text="Grubość:" VerticalOptions="Center"/>
+            <Slider x:Name="ThicknessSlider"
+                    Minimum="1" Maximum="100" Value="5"
+                    WidthRequest="100"
+                    VerticalOptions="Center"
+                    ValueChanged="OnThicknessChanged"/>
+            <Label x:Name="ThicknessLabel" Text="5" VerticalOptions="Center" WidthRequest="25"/>
+
+            <Label Text="Kolor:" VerticalOptions="Center"/>
+            <Button x:Name="ColorPickerButton"
+                    Text="  "
+                    BackgroundColor="Black"
+                    WidthRequest="40"
+                    HeightRequest="36"
+                    Clicked="OnColorPickerClicked"/>
+
+            <Button x:Name="EraserButton"
+                    Text="🧹 Gumka"
+                    Clicked="OnEraserClicked"
+                    BackgroundColor="#CCCCCC"/>
+
+            <Button Text="↩ Cofnij"
+                    Clicked="OnUndoClicked"
+                    BackgroundColor="#AED6F1"/>
+
+            <Button Text="🗑 Wyczyść"
+                    Clicked="OnClearClicked"
+                    BackgroundColor="#F1948A"/>
+
+            <Button Text="💾 Zapisz"
+                    Clicked="OnSaveClicked"
+                    BackgroundColor="#A9DFBF"/>
+
+            <Button Text="✕ Zakończ"
+                    Clicked="OnExitClicked"
+                    BackgroundColor="#F0B27A"/>
+
+        </HorizontalStackLayout>
+
+        <GraphicsView x:Name="DrawingCanvas"
+                      Grid.Row="1"
+                      BackgroundColor="White"
+                      Drawable="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=CanvasDrawable}"
+                      StartInteraction="OnCanvasStartInteraction"
+                      DragInteraction="OnCanvasDragInteraction"
+                      EndInteraction="OnCanvasEndInteraction"/>
+    </Grid>
+
+</ContentPage>
